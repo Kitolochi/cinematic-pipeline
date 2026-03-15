@@ -38,7 +38,7 @@ class Material:
         er, eg, eb, ea = self.emission_color
         lines = [
             f"mat = bpy.data.materials.new({self.name!r})",
-            "mat.use_nodes = True",
+            "# Nodes enabled by default in Blender 5.0+",
             "bsdf = mat.node_tree.nodes.get('Principled BSDF')",
             f"bsdf.inputs['Base Color'].default_value = ({r}, {g}, {b}, {a})",
             f"bsdf.inputs['Metallic'].default_value = {self.metallic}",
@@ -54,7 +54,6 @@ class Material:
         if self.alpha < 1.0:
             lines += [
                 f"bsdf.inputs['Alpha'].default_value = {self.alpha}",
-                "mat.blend_method = 'BLEND'",
             ]
 
         if self.transmission > 0:

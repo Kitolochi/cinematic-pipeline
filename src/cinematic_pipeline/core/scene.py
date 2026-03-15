@@ -21,7 +21,7 @@ class Scene:
     cameras: list[Any] = field(default_factory=list)
     lights: list[Any] = field(default_factory=list)
     world_color: tuple[float, float, float] = (0.01, 0.01, 0.02)
-    render_engine: str = "CYCLES"  # CYCLES or BLENDER_EEVEE_NEXT
+    render_engine: str = "CYCLES"  # CYCLES or BLENDER_EEVEE
     render_samples: int = 128
     use_denoising: bool = True
 
@@ -126,7 +126,7 @@ class Scene:
             "# World background",
             "world = bpy.data.worlds.get('World') or bpy.data.worlds.new('World')",
             "bpy.context.scene.world = world",
-            "world.use_nodes = True",
+            "# Nodes enabled by default in Blender 5.0+",
             "bg = world.node_tree.nodes.get('Background')",
             f"bg.inputs['Color'].default_value = ({r}, {g}, {b}, 1.0)",
             "",

@@ -96,8 +96,8 @@ def write_and_render(scene: Scene, config: RenderConfig, mode: str = "animation"
         f.write(script)
 
     engine_flag = ""
-    if scene.render_engine == "BLENDER_EEVEE_NEXT":
-        engine_flag = " -E BLENDER_EEVEE_NEXT"
+    if scene.render_engine == "BLENDER_EEVEE":
+        engine_flag = " -E BLENDER_EEVEE"
     elif scene.render_engine == "CYCLES":
         engine_flag = " -E CYCLES"
 

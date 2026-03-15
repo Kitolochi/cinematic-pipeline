@@ -16,7 +16,7 @@ You describe scenes using Python dataclasses. The pipeline generates Blender Pyt
 
 ### Prerequisites
 
-- **Blender 3.0+** — [Download](https://www.blender.org/download/) (free)
+- **Blender 5.0+** — [Download](https://www.blender.org/download/) (free, tested with 5.0.1)
 - **Python 3.10+**
 - **FFmpeg** — for video compositing (optional, Blender can render directly to MP4)
 - **NVIDIA GPU** — recommended for Cycles rendering (CPU works but 10x slower)
@@ -127,7 +127,7 @@ print(cmd)  # blender --background -E CYCLES --python ...
 - **Eevee** — Fast preview (~2-5s/frame). Good for iteration.
 - **Cycles** — Photorealistic final render. Use with GPU + denoising.
 
-Set via `Scene(render_engine="CYCLES")` or `Scene(render_engine="BLENDER_EEVEE_NEXT")`.
+Set via `Scene(render_engine="CYCLES")` or `Scene(render_engine="BLENDER_EEVEE")`.
 
 ## Blender MCP Integration (Phase 5)
 

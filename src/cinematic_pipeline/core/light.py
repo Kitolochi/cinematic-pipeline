@@ -77,7 +77,7 @@ class Light:
                 "",
                 "# Volumetric: ensure world has volume scatter",
                 "world = bpy.context.scene.world",
-                "if world and world.use_nodes:",
+                "if world:",
                 "    nodes = world.node_tree.nodes",
                 "    links = world.node_tree.links",
                 "    vol = nodes.get('Volume Scatter') or nodes.new('ShaderNodeVolumeScatter')",
