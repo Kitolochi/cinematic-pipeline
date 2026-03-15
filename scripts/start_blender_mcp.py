@@ -13,12 +13,18 @@ import time
 def auto_start_mcp():
     """Start the MCP server after Blender finishes loading."""
     try:
-        bpy.ops.blendermcp.connect()
-        print("\n[Cinematic Pipeline] MCP server started automatically!")
+        # Direct server start — bypasses operator context requirements
+        if not hasattr(bpy.types, "blendermcp_server") or not bpy.types.blendermcp_server:
+            from blender_mcp_addon import BlenderMCPServer
+            port = bpy.context.scene.blendermcp_port
+            bpy.types.blendermcp_server = BlenderMCPServer(port=port)
+        bpy.types.blendermcp_server.start()
+        bpy.context.scene.blendermcp_server_running = True
+        print(f"\n[Cinematic Pipeline] MCP server started on port {bpy.context.scene.blendermcp_port}!")
         print("[Cinematic Pipeline] Claude Code can now connect to Blender.")
     except Exception as e:
         print(f"\n[Cinematic Pipeline] Could not auto-start MCP: {e}")
-        print("[Cinematic Pipeline] Open sidebar (N) → BlenderMCP tab → click 'Start MCP Server'")
+        print("[Cinematic Pipeline] Open sidebar (N) → BlenderMCP tab → click 'Connect to Claude'")
     return None  # Don't repeat the timer
 
 

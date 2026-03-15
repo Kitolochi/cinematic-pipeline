@@ -129,26 +129,62 @@ print(cmd)  # blender --background -E CYCLES --python ...
 
 Set via `Scene(render_engine="CYCLES")` or `Scene(render_engine="BLENDER_EEVEE")`.
 
-## Blender MCP Integration (Phase 5)
+## VFX
 
-This pipeline is designed to work with [Blender MCP](https://github.com/ahujasid/blender-mcp) for Claude-controlled scene composition. With MCP, Claude can:
+### Particles
+
+| Preset | Description |
+|--------|-------------|
+| `ambient_dust()` | Slow-floating dust motes |
+| `explosion_burst()` | Fast radial burst at a specific frame |
+| `particle_trail()` | Motion trail behind moving objects |
+| `holographic_dust()` | Glowing holographic particles |
+| `sparks()` | Short-lived sparks with gravity |
+
+### Volumetrics
+
+| Preset | Description |
+|--------|-------------|
+| `VolumetricFog(density)` | World-level atmospheric fog |
+| `dramatic_overhead(target)` | Overhead volumetric spotlight |
+| `side_god_rays()` | Angled god rays from the side |
+
+### Post-Processing
+
+| Preset | Look |
+|--------|------|
+| `cinematic_post()` | Warm bloom, chromatic aberration, vignette |
+| `clean_tech()` | Subtle bloom, cool grade |
+| `sci_fi_glow()` | Heavy bloom, streaks, blue grade |
+
+## Blender MCP Integration
+
+This pipeline works with [Blender MCP](https://github.com/ahujasid/blender-mcp) for Claude-controlled scene composition. With MCP, Claude can:
 
 - Execute pipeline scripts directly in Blender
-- See the viewport via screenshots
+- Render frames and view results
 - Search Sketchfab for 3D models
 - Download HDRIs from Poly Haven
-- Iterate on scenes with visual feedback
 
-Setup guide coming in Phase 5.
+### Quick Start
+
+```bash
+# 1. Install the blender-mcp addon in Blender (Preferences → Add-ons)
+# 2. Launch Blender with auto-start:
+"C:/Program Files/Blender Foundation/Blender 5.0/blender.exe" --python scripts/start_blender_mcp.py
+
+# 3. Add MCP to Claude Code:
+claude mcp add --transport stdio blender -- uvx blender-mcp
+```
 
 ## Roadmap
 
 - [x] Phase 1: Core SDK (scene graph, camera, lights, materials, rendering)
-- [ ] Phase 2: VFX (particles, volumetrics, HUD overlays, post-processing)
+- [x] Phase 2: VFX (particles, volumetrics, post-processing)
+- [x] Blender MCP integration (live connection verified)
 - [ ] Phase 3: Asset pipeline (model import, HDRI library, Sketchfab integration)
 - [ ] Phase 4: Scene templates (Kinetiq-style shots)
-- [ ] Phase 5: Blender MCP integration
-- [ ] Phase 6: First production video
+- [ ] Phase 5: First production video
 
 ## License
 
