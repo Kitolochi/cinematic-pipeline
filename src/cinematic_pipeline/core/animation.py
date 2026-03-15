@@ -38,10 +38,12 @@ class Keyframe:
             f"{var}.keyframe_insert(data_path={self.property!r}, frame={self.frame})"
         )
 
-        # Set interpolation on the just-inserted keyframe
+        # Set interpolation on the just-inserted keyframe (Blender 5.0 layered actions)
         lines += [
             f"if {var}.animation_data and {var}.animation_data.action:",
-            f"    for fc in {var}.animation_data.action.fcurves:",
+            f"    _act = {var}.animation_data.action",
+            f"    _cbag = _act.layers[0].strips[0].channelbags[0]",
+            f"    for fc in _cbag.fcurves:",
             f"        if fc.data_path == {self.property!r}:",
             f"            for kp in fc.keyframe_points:",
             f"                if kp.co.x == {self.frame}:",
